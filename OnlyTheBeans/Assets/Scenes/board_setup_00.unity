@@ -688,7 +688,10 @@ MonoBehaviour:
   Speed: 2
   FallSpeed: 1
   JumpSpeed: 1
-  inAir: 0
+  PieceStat: 0
+  MoveCount: 0
+  moveToBoard: {fileID: 1749732170}
+  currentBoardLoc: {fileID: 1749732170}
 --- !u!1001 &301224998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2033,10 +2036,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
-  Cat: {fileID: 252721577}
+  Cat: {fileID: 252721578}
+  BoardPieces:
+  - {fileID: 252721578}
   CatSpeed: 2
-  moveToBoard: {fileID: 0}
-  currentBoardLoc: {fileID: 1749732170}
   moveCounter: 1
   BoardSpaces:
   - {fileID: 1749732170}

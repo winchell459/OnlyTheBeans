@@ -10,4 +10,18 @@ public abstract class BoardPiece : MonoBehaviour
     public float Speed = 2;
     public float FallSpeed = 1;
     public float JumpSpeed = 1;
+
+    public enum PieceStats
+    {
+        idle,
+        isMoving,
+        isFalling,
+        isRising,
+        isAttacking
+    }
+    public PieceStats PieceStat;
+    public int MoveCount;
+
+    public BoardSpace moveToBoard;
+    public BoardSpace currentBoardLoc;
 }

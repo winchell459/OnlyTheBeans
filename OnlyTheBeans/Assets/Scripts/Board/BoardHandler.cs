@@ -5,11 +5,20 @@ using UnityEngine;
 public class BoardHandler : MonoBehaviour
 {
     public Camera cam;
-    public Transform Cat;
+    public BoardPiece Cat;
+    public List<BoardPiece> BoardPieces;
     public float CatSpeed = 2;
-    public BoardSpace moveToBoard;
-    public BoardSpace currentBoardLoc;
+    //public BoardSpace moveToBoard;
+    //public BoardSpace currentBoardLoc;
     private bool isMoving = false;
+
+    //public enum BoardStats
+    //{
+    //    canSelect,
+    //    isMoving,
+    //    isFalling,
+    //    isRising
+    //}
 
 
     public int moveCounter = 1;
@@ -33,12 +42,15 @@ public class BoardHandler : MonoBehaviour
     public float ScaleSelectedButton = 1.5f;
 
     public LayerMask layerMask;
+
     // Start is called before the first frame update
     void Start()
     {
-        moveToBoard = currentBoardLoc;
+        Cat.moveToBoard = Cat.currentBoardLoc;
         isMoving = true;
         setupBoard();
+
+        Debug.Log(Cat.moveToBoard.GetEastPoint());
     }
 
     // Update is called once per frame
@@ -47,6 +59,7 @@ public class BoardHandler : MonoBehaviour
 
         handleBoardSpaceSelection();
         handleMovement();
+        
     }
 
     private void setupBoard()
@@ -84,10 +97,10 @@ public class BoardHandler : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100, layerMask))
             {
                 BoardSpace selected = hit.transform.GetComponent<BoardSpace>();
-                if (currentBoardLoc.x == selected.x || currentBoardLoc.z == selected.z)
+                if (Cat.currentBoardLoc.x == selected.x || Cat.currentBoardLoc.z == selected.z)
                 {
-                    moveToBoard = selected;
-                    moveToBoard = getNextSpace();
+                    Cat.moveToBoard = selected;
+                    Cat.moveToBoard = getNextSpace();
                     isMoving = true;
                     if (CatMove == CatMoves.MoveOne) moveCounter = 1;
                     else if (CatMove == CatMoves.MoveFour) moveCounter = 4;
@@ -102,35 +115,37 @@ public class BoardHandler : MonoBehaviour
     {
         if (isMoving)
         {
-            Vector3 catToSpacePos = new Vector3(Cat.position.x, moveToBoard.top.y, Cat.position.z); //cat position in x and z ignoring y
-            if (Vector3.Distance(catToSpacePos, moveToBoard.top) < CatSpeed * Time.deltaTime )
+            float x = Cat.transform.position.x;
+            float z = Cat.transform.position.z;
+            Vector3 catToSpacePos = new Vector3(x, Cat.moveToBoard.GetHeight(Cat.moveToBoard.x,Cat.moveToBoard.z), z); //cat position in x and z ignoring y
+            if (Vector3.Distance(catToSpacePos, Cat.moveToBoard.top) < CatSpeed * Time.deltaTime )
             {
                 if(moveCounter <= 1 && !Cat.GetComponent<CatController>().inAir)
                 {
-                    Cat.position = moveToBoard.top;
-                    currentBoardLoc = moveToBoard;
+                    Cat.transform.position = Cat.moveToBoard.top;
+                    Cat.currentBoardLoc = Cat.moveToBoard;
                     isMoving = false;
-
+                    canSelectMove = true;
                 }
                 else
                 {
-                    BoardSpace tempCurrent = moveToBoard;
-                    if(currentBoardLoc.PosX == moveToBoard)
+                    BoardSpace tempCurrent = Cat.moveToBoard;
+                    if(Cat.currentBoardLoc.PosX == Cat.moveToBoard)
                     {
-                        moveToBoard = moveToBoard.PosX;
-                    }else if(currentBoardLoc.PosZ == moveToBoard)
+                        Cat.moveToBoard = Cat.moveToBoard.PosX;
+                    }else if(Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
                     {
-                        moveToBoard = moveToBoard.PosZ;
+                        Cat.moveToBoard = Cat.moveToBoard.PosZ;
                     }
-                    else if(currentBoardLoc.NegX == moveToBoard)
+                    else if(Cat.currentBoardLoc.NegX == Cat.moveToBoard)
                     {
-                        moveToBoard = moveToBoard.NegX;
+                        Cat.moveToBoard = Cat.moveToBoard.NegX;
                     }
                     else
                     {
-                        moveToBoard = moveToBoard.NegZ;
+                        Cat.moveToBoard = Cat.moveToBoard.NegZ;
                     }
-                    currentBoardLoc = tempCurrent;
+                    Cat.currentBoardLoc = tempCurrent;
                 }
 
                 moveCounter -= 1;
@@ -138,8 +153,8 @@ public class BoardHandler : MonoBehaviour
             }
             else
             {
-                catToSpacePos = Vector3.MoveTowards(catToSpacePos, moveToBoard.top, CatSpeed * Time.deltaTime);
-                Cat.position = new Vector3(catToSpacePos.x, Cat.position.y, catToSpacePos.z);
+                catToSpacePos = Vector3.MoveTowards(catToSpacePos, Cat.moveToBoard.top, Cat.Speed * Time.deltaTime);
+                Cat.transform.position = new Vector3(catToSpacePos.x, Cat.transform.position.y, catToSpacePos.z);
             }
 
 
@@ -148,10 +163,10 @@ public class BoardHandler : MonoBehaviour
 
     private BoardSpace getNextSpace()
     {
-        if (currentBoardLoc.PosX.GetNextPosX(moveToBoard)) return currentBoardLoc.PosX;
-        else if (currentBoardLoc.PosZ.GetNextPosZ(moveToBoard)) return currentBoardLoc.PosZ;
-        else if (currentBoardLoc.NegX.GetNextNegX(moveToBoard)) return currentBoardLoc.NegX;
-        else if (currentBoardLoc.NegZ.GetNextNegZ(moveToBoard)) return currentBoardLoc.NegZ;
+        if (Cat.currentBoardLoc.PosX.GetNextPosX(Cat.moveToBoard)) return Cat.currentBoardLoc.PosX;
+        else if (Cat.currentBoardLoc.PosZ.GetNextPosZ(Cat.moveToBoard)) return Cat.currentBoardLoc.PosZ;
+        else if (Cat.currentBoardLoc.NegX.GetNextNegX(Cat.moveToBoard)) return Cat.currentBoardLoc.NegX;
+        else if (Cat.currentBoardLoc.NegZ.GetNextNegZ(Cat.moveToBoard)) return Cat.currentBoardLoc.NegZ;
         else return null;
     }
 
@@ -159,7 +174,7 @@ public class BoardHandler : MonoBehaviour
     {
         if (!isMoving)
         {
-            moveToBoard = board;
+            Cat.moveToBoard = board;
             canSelectMove = false;
         }
     }
@@ -174,6 +189,13 @@ public class BoardHandler : MonoBehaviour
             CatMove = (CatMoves)System.Enum.Parse(typeof(CatMoves), catMove);
         }
 
+    }
+    public void SetCatMove(CatMove catMove)
+    {
+        if (canSelectMove)
+        {
+
+        }
     }
 
 }

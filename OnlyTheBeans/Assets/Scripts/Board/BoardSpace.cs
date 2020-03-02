@@ -25,6 +25,22 @@ public abstract class BoardSpace : MonoBehaviour
     public abstract void HandleMovement();
     public abstract void myCollision(Collision collision);
 
+    public abstract float GetHeight(float xPos, float zPos);
+    public abstract float GetFriction(float xPos, float zPos);
+    //public abstract Vector3 GetEastPoint();
+    //public abstract Vector3 GetWestPoint();
+    //public abstract Vector3 GetNorthPoint();
+    //public abstract Vector3 GetSouthPoint();
+    public Vector3 GetEastPoint()
+    {
+        float sizeX = transform.localScale.x/2;
+        //float sizeZ = transform.localScale.z/2;
+        Vector3 directionX = transform.right * sizeX + transform.position;
+        directionX = new Vector3(directionX.x, GetHeight(directionX.x, transform.position.z), transform.position.z);
+        return directionX;
+        
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         

@@ -4,6 +4,36 @@ using UnityEngine;
 
 public class BoardAir : BoardSpace
 {
+    public override float GetFriction(float xPos, float zPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override float GetHeight(float xPos, float zPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //public override Vector3 GetEastPoint()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
+    //public override Vector3 GetNorthPoint()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
+    //public override Vector3 GetSouthPoint()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
+    //public override Vector3 GetWestPoint()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
+
     public override void HandleMovement()
     {
         throw new System.NotImplementedException();
