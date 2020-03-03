@@ -7,7 +7,7 @@ public class BoardHandler : MonoBehaviour
     public Camera cam;
     public BoardPiece Cat;
     public List<BoardPiece> BoardPieces;
-    public float CatSpeed = 2;
+    //public float CatSpeed = 2;
     //public BoardSpace moveToBoard;
     //public BoardSpace currentBoardLoc;
     private bool isMoving = false;
@@ -50,7 +50,8 @@ public class BoardHandler : MonoBehaviour
         isMoving = true;
         setupBoard();
 
-        Debug.Log(Cat.moveToBoard.GetEastPoint());
+        Debug.Log(Cat.moveToBoard.GetEastPoint() + " west: " + Cat.moveToBoard.GetWestPoint() + " north: " + Cat.moveToBoard.GetNorthPoint() + " south: " + Cat.moveToBoard.GetSouthPoint());
+
     }
 
     // Update is called once per frame
@@ -70,22 +71,41 @@ public class BoardHandler : MonoBehaviour
             if (i % 5 < 4)
             {
                 space.PosX = BoardSpaces[i + 1];
-
+                setSpaceElevation(space, space.PosX);
             }
             if (i % 5 > 0)
             {
                 space.NegX = BoardSpaces[i - 1];
+                setSpaceElevation(space, space.NegX);
             }
             if ( (int)(i / 5) > 0)
             {
                 space.NegZ = BoardSpaces[i - 5];
+                setSpaceElevation(space, space.NegZ);
             }
             if ((int)(i / 5) < 4)
             {
                 space.PosZ = BoardSpaces[i + 5];
+                setSpaceElevation(space, space.PosZ);
             }
 
         }
+    }
+    private void setSpaceElevation(BoardSpace space, BoardSpace addedSpace)
+    {
+        BoardSpace.BoardSpaceElevations elevation = BoardSpace.BoardSpaceElevations.Level;
+        if(addedSpace.y > space.y)
+        {
+            elevation = BoardSpace.BoardSpaceElevations.Up;
+        }else if(addedSpace.y < space.y)
+        {
+            elevation = BoardSpace.BoardSpaceElevations.Down;
+        }
+
+        if (space.NegX == addedSpace) space.NegXElev = elevation;
+        if (space.NegZ == addedSpace) space.NegZElev = elevation;
+        if (space.PosX == addedSpace) space.PosXElev = elevation;
+        if (space.PosZ == addedSpace) space.PosZElev = elevation;
     }
     private void handleBoardSpaceSelection()
     {
@@ -100,7 +120,7 @@ public class BoardHandler : MonoBehaviour
                 if (Cat.currentBoardLoc.x == selected.x || Cat.currentBoardLoc.z == selected.z)
                 {
                     Cat.moveToBoard = selected;
-                    Cat.moveToBoard = getNextSpace();
+                    Cat.moveToBoard = getNextSpace(Cat);
                     isMoving = true;
                     if (CatMove == CatMoves.MoveOne) moveCounter = 1;
                     else if (CatMove == CatMoves.MoveFour) moveCounter = 4;
@@ -117,12 +137,40 @@ public class BoardHandler : MonoBehaviour
         {
             float x = Cat.transform.position.x;
             float z = Cat.transform.position.z;
-            Vector3 catToSpacePos = new Vector3(x, Cat.moveToBoard.GetHeight(Cat.moveToBoard.x,Cat.moveToBoard.z), z); //cat position in x and z ignoring y
-            if (Vector3.Distance(catToSpacePos, Cat.moveToBoard.top) < CatSpeed * Time.deltaTime )
+            
+            Vector3 moveToTarget;
+            if (moveCounter > 1)
+            {
+                
+                if (Cat.currentBoardLoc.PosX == Cat.moveToBoard)
+                {
+                    moveToTarget = Cat.moveToBoard.GetEastPoint();
+                }
+                else if (Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
+                {
+                    moveToTarget = Cat.moveToBoard.GetNorthPoint();
+                }
+                else if (Cat.currentBoardLoc.NegX == Cat.moveToBoard)
+                {
+                    moveToTarget = Cat.moveToBoard.GetWestPoint();
+                }
+                else
+                {
+                    moveToTarget = Cat.moveToBoard.GetSouthPoint();
+                }
+            }
+            else
+            {
+                moveToTarget = new Vector3(Cat.moveToBoard.transform.position.x, Cat.moveToBoard.GetCenterPoint().y, Cat.moveToBoard.transform.position.z);
+            }
+
+            Vector3 catToSpacePos = new Vector3(x, moveToTarget.y, z); //cat position in x and z ignoring y
+
+            if (Vector3.Distance(catToSpacePos, moveToTarget) < Cat.Speed * Time.deltaTime )
             {
                 if(moveCounter <= 1 && !Cat.GetComponent<CatController>().inAir)
                 {
-                    Cat.transform.position = Cat.moveToBoard.top;
+                    Cat.transform.position = moveToTarget;
                     Cat.currentBoardLoc = Cat.moveToBoard;
                     isMoving = false;
                     canSelectMove = true;
@@ -153,7 +201,7 @@ public class BoardHandler : MonoBehaviour
             }
             else
             {
-                catToSpacePos = Vector3.MoveTowards(catToSpacePos, Cat.moveToBoard.top, Cat.Speed * Time.deltaTime);
+                catToSpacePos = Vector3.MoveTowards(catToSpacePos, moveToTarget, Cat.Speed * Time.deltaTime);
                 Cat.transform.position = new Vector3(catToSpacePos.x, Cat.transform.position.y, catToSpacePos.z);
             }
 
@@ -161,12 +209,12 @@ public class BoardHandler : MonoBehaviour
         }
     }
 
-    private BoardSpace getNextSpace()
+    private BoardSpace getNextSpace(BoardPiece piece)
     {
-        if (Cat.currentBoardLoc.PosX.GetNextPosX(Cat.moveToBoard)) return Cat.currentBoardLoc.PosX;
-        else if (Cat.currentBoardLoc.PosZ.GetNextPosZ(Cat.moveToBoard)) return Cat.currentBoardLoc.PosZ;
-        else if (Cat.currentBoardLoc.NegX.GetNextNegX(Cat.moveToBoard)) return Cat.currentBoardLoc.NegX;
-        else if (Cat.currentBoardLoc.NegZ.GetNextNegZ(Cat.moveToBoard)) return Cat.currentBoardLoc.NegZ;
+        if (piece.currentBoardLoc.PosX && piece.currentBoardLoc.PosX.GetNextPosX(piece.moveToBoard)) return piece.currentBoardLoc.PosX;
+        else if (piece.currentBoardLoc.PosZ && piece.currentBoardLoc.PosZ.GetNextPosZ(piece.moveToBoard)) return piece.currentBoardLoc.PosZ;
+        else if (piece.currentBoardLoc.NegX && piece.currentBoardLoc.NegX.GetNextNegX(piece.moveToBoard)) return piece.currentBoardLoc.NegX;
+        else if (piece.currentBoardLoc.NegZ && piece.currentBoardLoc.NegZ.GetNextNegZ(piece.moveToBoard)) return piece.currentBoardLoc.NegZ;
         else return null;
     }
 

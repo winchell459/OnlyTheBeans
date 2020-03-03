@@ -34,11 +34,38 @@ public abstract class BoardSpace : MonoBehaviour
     public Vector3 GetEastPoint()
     {
         float sizeX = transform.localScale.x/2;
-        //float sizeZ = transform.localScale.z/2;
         Vector3 directionX = transform.right * sizeX + transform.position;
         directionX = new Vector3(directionX.x, GetHeight(directionX.x, transform.position.z), transform.position.z);
         return directionX;
         
+    }
+    public Vector3 GetWestPoint()
+    {
+        float sizeX = transform.localScale.x / 2;
+        Vector3 directionX = -transform.right * sizeX + transform.position;
+        directionX = new Vector3(directionX.x, GetHeight(directionX.x, transform.position.z), transform.position.z);
+        return directionX;
+
+    }
+    public Vector3 GetNorthPoint()
+    {
+        float sizeZ = transform.localScale.z / 2;
+        Vector3 direction = transform.forward * sizeZ + transform.position;
+        direction = new Vector3(transform.position.x, GetHeight(direction.x, transform.position.z), direction.z);
+        return direction;
+
+    }
+    public Vector3 GetSouthPoint()
+    {
+        float sizeZ = transform.localScale.z / 2;
+        Vector3 direction = -transform.forward * sizeZ + transform.position;
+        direction = new Vector3(transform.position.x, GetHeight(direction.x, transform.position.z), direction.z);
+        return direction;
+
+    }
+    public Vector3 GetCenterPoint()
+    {
+        return new Vector3(transform.position.x, GetHeight(transform.position.x, transform.position.z), transform.position.z);
     }
 
     public void OnCollisionEnter(Collision collision)
