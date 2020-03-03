@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "PieceMove/Up")]
+public class Up : PieceMove
+{
+    public float UpDistance = 1;
+    public float UpFactor = 1;
+    private Vector3 forwardVector;
+    public override Vector3 BackwardVector()
+    {
+        return -forwardVector;
+    }
+
+    public override Vector3 ForwardVector()
+    {
+        return forwardVector;
+    }
+
+    public override PieceMove GetCopy()
+    {
+        return new Up();
+    }
+    public override string GetMyType()
+    {
+        return "Up";
+    }
+    public override void InitializeMoveType(bool lastSpace)
+    {
+        EndLoc = StartLoc + new Vector3(0, 1, 0) * UpDistance;
+        forwardVector = UpFactor * (EndLoc - StartLoc).normalized;
+    }
+}
