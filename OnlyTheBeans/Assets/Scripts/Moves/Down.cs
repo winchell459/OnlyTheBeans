@@ -27,7 +27,7 @@ public class Down : PieceMove
         return "Down";
     }
 
-    public override void InitializeMoveType(bool lastSpace)
+    public override void InitializeMoveType(bool isLastSpace)
     {
         Vector3 spaceTop = moveSpace.GetCenterPoint();
         if (spaceTop.y > myPiece.transform.position.y - DownDistance)
@@ -39,5 +39,9 @@ public class Down : PieceMove
             EndLoc = new Vector3(spaceTop.x, myPiece.transform.position.y - DownDistance, spaceTop.z);
         }
         forwardVector = DownFactor * (EndLoc - StartLoc).normalized;
+    }
+    public override Vector3 GetEndLoc()
+    {
+        return EndLoc;
     }
 }

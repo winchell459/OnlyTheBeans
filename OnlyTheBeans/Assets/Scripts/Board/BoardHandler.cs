@@ -10,7 +10,7 @@ public class BoardHandler : MonoBehaviour
     //public float CatSpeed = 2;
     //public BoardSpace moveToBoard;
     //public BoardSpace currentBoardLoc;
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     //public enum BoardStats
     //{
@@ -25,17 +25,17 @@ public class BoardHandler : MonoBehaviour
 
     public BoardSpace[] BoardSpaces;
 
-    public enum CatMoves
-    {
-        MoveOne,
-        MoveTwo,
-        MoveFour,
-        JumpOneMoveOne,
-        JumpOne,
-        JumpTwo,
-        JumpFour
-    }
-    public CatMoves CatMove;
+    //public enum CatMoves
+    //{
+    //    MoveOne,
+    //    MoveTwo,
+    //    MoveFour,
+    //    JumpOneMoveOne,
+    //    JumpOne,
+    //    JumpTwo,
+    //    JumpFour
+    //}
+    //public CatMoves CatMove;
     private bool canSelectMove = false;
     public GameObject SelectedButtonCatMove;
     private float selectedButtonScale;
@@ -47,10 +47,11 @@ public class BoardHandler : MonoBehaviour
     void Start()
     {
         Cat.moveToBoard = Cat.currentBoardLoc;
-        isMoving = true;
+        //isMoving = true;
+        canSelectMove = true;
         setupBoard();
 
-        Debug.Log(Cat.moveToBoard.GetEastPoint() + " west: " + Cat.moveToBoard.GetWestPoint() + " north: " + Cat.moveToBoard.GetNorthPoint() + " south: " + Cat.moveToBoard.GetSouthPoint());
+        //Debug.Log(Cat.moveToBoard.GetEastPoint() + " west: " + Cat.moveToBoard.GetWestPoint() + " north: " + Cat.moveToBoard.GetNorthPoint() + " south: " + Cat.moveToBoard.GetSouthPoint());
 
     }
 
@@ -122,9 +123,20 @@ public class BoardHandler : MonoBehaviour
                     Cat.moveToBoard = selected;
                     Cat.moveToBoard = getNextSpace(Cat);
                     isMoving = true;
-                    if (CatMove == CatMoves.MoveOne) moveCounter = 1;
-                    else if (CatMove == CatMoves.MoveFour) moveCounter = 4;
-                    else if (CatMove == CatMoves.MoveTwo) moveCounter = 2;
+                    Board.Direction direction;
+                    if (Cat.moveToBoard == Cat.currentBoardLoc.PosX) direction = Board.Direction.East;
+                    else if (Cat.moveToBoard == Cat.currentBoardLoc.PosZ) direction = Board.Direction.North;
+                    else if (Cat.moveToBoard == Cat.currentBoardLoc.NegX) direction = Board.Direction.West;
+                    else direction = Board.Direction.South;
+
+                    Cat.pieceDirection = direction;
+                    foreach(BoardPiece piece in BoardPieces)
+                    {
+                        piece.InitializeMoves();
+                    }
+                    //if (CatMove == CatMoves.MoveOne) moveCounter = 1;
+                    //else if (CatMove == CatMoves.MoveFour) moveCounter = 4;
+                    //else if (CatMove == CatMoves.MoveTwo) moveCounter = 2;
                 }
 
             }
@@ -135,75 +147,81 @@ public class BoardHandler : MonoBehaviour
     {
         if (isMoving)
         {
-            float x = Cat.transform.position.x;
-            float z = Cat.transform.position.z;
-            
-            Vector3 moveToTarget;
-            if (moveCounter > 1)
+            isMoving = false;
+            foreach(BoardPiece piece in BoardPieces)
             {
-                
-                if (Cat.currentBoardLoc.PosX == Cat.moveToBoard)
-                {
-                    moveToTarget = Cat.moveToBoard.GetEastPoint();
-                }
-                else if (Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
-                {
-                    moveToTarget = Cat.moveToBoard.GetNorthPoint();
-                }
-                else if (Cat.currentBoardLoc.NegX == Cat.moveToBoard)
-                {
-                    moveToTarget = Cat.moveToBoard.GetWestPoint();
-                }
-                else
-                {
-                    moveToTarget = Cat.moveToBoard.GetSouthPoint();
-                }
+                bool notDone = piece.MovePiece();
+                if (notDone) isMoving = true;
             }
-            else
-            {
-                moveToTarget = new Vector3(Cat.moveToBoard.transform.position.x, Cat.moveToBoard.GetCenterPoint().y, Cat.moveToBoard.transform.position.z);
-            }
+            //float x = Cat.transform.position.x;
+            //float z = Cat.transform.position.z;
 
-            Vector3 catToSpacePos = new Vector3(x, moveToTarget.y, z); //cat position in x and z ignoring y
+            //Vector3 moveToTarget;
+            //if (moveCounter > 1)
+            //{
 
-            if (Vector3.Distance(catToSpacePos, moveToTarget) < Cat.Speed * Time.deltaTime )
-            {
-                if(moveCounter <= 1 && !Cat.GetComponent<CatController>().inAir)
-                {
-                    Cat.transform.position = moveToTarget;
-                    Cat.currentBoardLoc = Cat.moveToBoard;
-                    isMoving = false;
-                    canSelectMove = true;
-                }
-                else
-                {
-                    BoardSpace tempCurrent = Cat.moveToBoard;
-                    if(Cat.currentBoardLoc.PosX == Cat.moveToBoard)
-                    {
-                        Cat.moveToBoard = Cat.moveToBoard.PosX;
-                    }else if(Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
-                    {
-                        Cat.moveToBoard = Cat.moveToBoard.PosZ;
-                    }
-                    else if(Cat.currentBoardLoc.NegX == Cat.moveToBoard)
-                    {
-                        Cat.moveToBoard = Cat.moveToBoard.NegX;
-                    }
-                    else
-                    {
-                        Cat.moveToBoard = Cat.moveToBoard.NegZ;
-                    }
-                    Cat.currentBoardLoc = tempCurrent;
-                }
+            //    if (Cat.currentBoardLoc.PosX == Cat.moveToBoard)
+            //    {
+            //        moveToTarget = Cat.moveToBoard.GetEastPoint();
+            //    }
+            //    else if (Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
+            //    {
+            //        moveToTarget = Cat.moveToBoard.GetNorthPoint();
+            //    }
+            //    else if (Cat.currentBoardLoc.NegX == Cat.moveToBoard)
+            //    {
+            //        moveToTarget = Cat.moveToBoard.GetWestPoint();
+            //    }
+            //    else
+            //    {
+            //        moveToTarget = Cat.moveToBoard.GetSouthPoint();
+            //    }
+            //}
+            //else
+            //{
+            //    moveToTarget = new Vector3(Cat.moveToBoard.transform.position.x, Cat.moveToBoard.GetCenterPoint().y, Cat.moveToBoard.transform.position.z);
+            //}
 
-                moveCounter -= 1;
+            //Vector3 catToSpacePos = new Vector3(x, moveToTarget.y, z); //cat position in x and z ignoring y
 
-            }
-            else
-            {
-                catToSpacePos = Vector3.MoveTowards(catToSpacePos, moveToTarget, Cat.Speed * Time.deltaTime);
-                Cat.transform.position = new Vector3(catToSpacePos.x, Cat.transform.position.y, catToSpacePos.z);
-            }
+            //if (Vector3.Distance(catToSpacePos, moveToTarget) < Cat.Speed * Time.deltaTime )
+            //{
+            //    if(moveCounter <= 1 && !Cat.GetComponent<CatController>().inAir)
+            //    {
+            //        Cat.transform.position = moveToTarget;
+            //        Cat.currentBoardLoc = Cat.moveToBoard;
+            //        isMoving = false;
+            //        canSelectMove = true;
+            //    }
+            //    else
+            //    {
+            //        BoardSpace tempCurrent = Cat.moveToBoard;
+            //        if(Cat.currentBoardLoc.PosX == Cat.moveToBoard)
+            //        {
+            //            Cat.moveToBoard = Cat.moveToBoard.PosX;
+            //        }else if(Cat.currentBoardLoc.PosZ == Cat.moveToBoard)
+            //        {
+            //            Cat.moveToBoard = Cat.moveToBoard.PosZ;
+            //        }
+            //        else if(Cat.currentBoardLoc.NegX == Cat.moveToBoard)
+            //        {
+            //            Cat.moveToBoard = Cat.moveToBoard.NegX;
+            //        }
+            //        else
+            //        {
+            //            Cat.moveToBoard = Cat.moveToBoard.NegZ;
+            //        }
+            //        Cat.currentBoardLoc = tempCurrent;
+            //    }
+
+            //    moveCounter -= 1;
+
+            //}
+            //else
+            //{
+            //    catToSpacePos = Vector3.MoveTowards(catToSpacePos, moveToTarget, Cat.Speed * Time.deltaTime);
+            //    Cat.transform.position = new Vector3(catToSpacePos.x, Cat.transform.position.y, catToSpacePos.z);
+            //}
 
 
         }
@@ -216,6 +234,10 @@ public class BoardHandler : MonoBehaviour
         else if (piece.currentBoardLoc.NegX && piece.currentBoardLoc.NegX.GetNextNegX(piece.moveToBoard)) return piece.currentBoardLoc.NegX;
         else if (piece.currentBoardLoc.NegZ && piece.currentBoardLoc.NegZ.GetNextNegZ(piece.moveToBoard)) return piece.currentBoardLoc.NegZ;
         else return null;
+    }
+    public BoardSpace GetNextSpace(BoardSpace space, Board.Direction direction)
+    {
+        return space.GetSpaceByDirection(direction);
     }
 
     public void BoardSpaceSelected(BoardSpace board)
@@ -234,15 +256,15 @@ public class BoardHandler : MonoBehaviour
         {
             SelectedButtonCatMove = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
-            CatMove = (CatMoves)System.Enum.Parse(typeof(CatMoves), catMove);
+            //CatMove = (MoveSet)System.Enum.Parse(typeof(MoveSet), catMove);
         }
 
     }
-    public void SetCatMove(CatMove catMove)
+    public void SetCatMove(MoveSet catMove)
     {
         if (canSelectMove)
         {
-
+            Cat.moveSet = catMove;
         }
     }
 

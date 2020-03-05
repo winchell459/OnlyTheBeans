@@ -7,7 +7,8 @@ public abstract class PieceMove : ScriptableObject
 {
     public Vector3 StartLoc;
     public Vector3 EndLoc;
-    public Vector3 Direction;
+    //public Vector3 Direction;
+    public Board.Direction Direction;
     public BoardSpace moveSpace;
     public BoardPiece myPiece;
     public float test = 0;
@@ -17,7 +18,7 @@ public abstract class PieceMove : ScriptableObject
     public abstract string GetMyType();
     public abstract Vector3 ForwardVector();
     public abstract Vector3 BackwardVector();
-    public void InitializeMove(Vector3 StartLoc, BoardPiece myPiece, BoardSpace moveSpace, Vector3 Direction, bool lastSpace)
+    public void InitializeMove(Vector3 StartLoc, BoardPiece myPiece, BoardSpace moveSpace, Board.Direction Direction, bool lastSpace)
     {
         this.myPiece = myPiece;
         this.moveSpace = moveSpace;
@@ -26,5 +27,6 @@ public abstract class PieceMove : ScriptableObject
         this.StartLoc = StartLoc;
         InitializeMoveType(lastSpace);
     }
-    public abstract void InitializeMoveType(bool lastSpace);
+    public abstract void InitializeMoveType(bool isLastSpace);
+    public abstract Vector3 GetEndLoc();
 }

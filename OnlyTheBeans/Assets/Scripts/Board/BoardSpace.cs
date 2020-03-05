@@ -31,6 +31,22 @@ public abstract class BoardSpace : MonoBehaviour
     //public abstract Vector3 GetWestPoint();
     //public abstract Vector3 GetNorthPoint();
     //public abstract Vector3 GetSouthPoint();
+    public BoardSpace GetSpaceByDirection(Board.Direction Direction)
+    {
+        if (Direction == Board.Direction.East) return PosX;
+        else if (Direction == Board.Direction.North) return PosZ;
+        else if (Direction == Board.Direction.West) return NegX;
+        else if (Direction == Board.Direction.South) return NegZ;
+        else return null;
+    }
+    public Vector3 GetPointStartByDirection(Board.Direction enters)
+    {
+        if (enters == Board.Direction.East) return GetWestPoint();
+        else if (enters == Board.Direction.West) return GetEastPoint();
+        else if (enters == Board.Direction.North) return GetSouthPoint();
+        else return GetNorthPoint();
+    }
+
     public Vector3 GetEastPoint()
     {
         float sizeX = transform.localScale.x/2;

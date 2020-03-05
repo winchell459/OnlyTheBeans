@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b45145a39007470a99b199644035f10, type: 3}
-  m_Name: Up
+  m_Script: {fileID: 11500000, guid: 48758e33d2bc9418bbd65df6d5d8ddb4, type: 3}
+  m_Name: Down
   m_EditorClassIdentifier: 
-  StartLoc: {x: 2, y: 1.4660785, z: 1.9818496}
-  EndLoc: {x: 2, y: 2.6660786, z: 1.9818496}
-  Direction: 2
+  StartLoc: {x: 2.468843, y: 0.5, z: 2}
+  EndLoc: {x: 2, y: 1.5, z: 2}
+  Direction: 1
   moveSpace: {fileID: 0}
   myPiece: {fileID: 0}
   test: 0
   Initialized: 0
-  UpDistance: 1.2
-  UpFactor: 1
+  DownDistance: 10
+  DownFactor: 1

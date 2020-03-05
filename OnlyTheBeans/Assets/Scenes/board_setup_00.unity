@@ -360,10 +360,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 135727445}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: JumpFour
@@ -417,7 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa99141a9c14979b4e9f2a9b657952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moves: []
+  Moves:
+  - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!4 &149740347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
@@ -546,7 +552,7 @@ PrefabInstance:
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
@@ -696,16 +702,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PosOffset: {x: 0, y: 0, z: 0}
-  Height: 0
+  Height: 1
   Width: 0
   inAir: 0
   Speed: 2
   FallSpeed: 1
   JumpSpeed: 1
+  moveSet: {fileID: 0}
   PieceStat: 0
   MoveCount: 0
   moveToBoard: {fileID: 1749732170}
   currentBoardLoc: {fileID: 1749732170}
+  pieceDirection: 0
 --- !u!1001 &301224998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -860,10 +868,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 312860667}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: JumpTwo
@@ -917,7 +925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa99141a9c14979b4e9f2a9b657952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moves: []
+  Moves:
+  - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!1001 &456178404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1218,7 +1230,7 @@ PrefabInstance:
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
@@ -1400,10 +1412,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 661108246}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: JumpOneMoveOne
@@ -1457,7 +1469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa99141a9c14979b4e9f2a9b657952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moves: []
+  Moves:
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 6.648, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1868,7 +1885,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.24902959, y: 0.36851916, z: -0.10315145, w: 0.8896841}
-  m_LocalPosition: {x: -1.72, y: 3.15, z: -2.13}
+  m_LocalPosition: {x: -1.72, y: 3.93, z: -2.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1965,10 +1982,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1063765378}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: JumpOne
@@ -2025,6 +2042,7 @@ MonoBehaviour:
   Moves:
   - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!1 &1096609379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,6 +2115,7 @@ MonoBehaviour:
   Cat: {fileID: 252721578}
   BoardPieces:
   - {fileID: 252721578}
+  isMoving: 0
   moveCounter: 1
   BoardSpaces:
   - {fileID: 1749732170}
@@ -2124,7 +2143,6 @@ MonoBehaviour:
   - {fileID: 1285332818}
   - {fileID: 625327551}
   - {fileID: 1221856769}
-  CatMove: 0
   SelectedButtonCatMove: {fileID: 0}
   ScaleSelectedButton: 1.5
   layerMask:
@@ -2941,10 +2959,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1552646053}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: MoveOne
@@ -3000,6 +3018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Moves:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!1 &1641083127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,7 +3209,7 @@ PrefabInstance:
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
@@ -3474,7 +3493,7 @@ PrefabInstance:
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
@@ -3937,10 +3956,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1942946995}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: MoveFour
@@ -3994,7 +4013,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa99141a9c14979b4e9f2a9b657952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moves: []
+  Moves:
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!114 &1951083979 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
@@ -4098,10 +4122,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096609381}
         m_MethodName: SetCatMove
-        m_Mode: 5
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1999291318}
+          m_ObjectArgumentAssemblyTypeName: MoveSet, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: MoveTwo
@@ -4155,7 +4179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa99141a9c14979b4e9f2a9b657952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Moves: []
+  Moves:
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
+  - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
 --- !u!1001 &2071525975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4251,7 +4278,7 @@ PrefabInstance:
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
