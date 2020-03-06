@@ -60,24 +60,19 @@ public abstract class BoardPiece : MonoBehaviour
         }
         else
         {
-            PieceMove nextMove = moveSet.GetNextMove(transform.position, this, currentBoardLoc, pieceDirection);
+            //PieceMove nextMove = moveSet.GetNextMove(transform.position, this, currentBoardLoc, pieceDirection);
             if (moveSet.HasNextMove())
             {
                 BoardSpace nextSpace = currentBoardLoc.GetSpaceByDirection(pieceDirection);
-                if ((nextMove.GetMyType() == "Walk" ) && nextSpace.GetPointStartByDirection(pieceDirection).y > transform.position.y)
-                {
-                    pieceDirection = Board.FlipDirection(pieceDirection);
-                    moveSet.GetMoveFlipped(pieceDirection, nextSpace);
-                }
-                else
-                {
+                pieceDirection = move.Direction;
+                PieceMove nextMove = moveSet.GetNextMove(transform.position, this, currentBoardLoc, pieceDirection);
                     //currentBoardLoc = nextSpace;
-                    move = nextMove;
-                    float deltaTime = Time.deltaTime * moveVector.magnitude / remainingDistance;
-                    moveVector = move.ForwardVector();
-                    friction = 1;  //currentBoardLoc.GetFriction()
-                    moveVector = friction * Speed * deltaTime * moveVector;
-                }
+                move = nextMove;
+                float deltaTime = Time.deltaTime * moveVector.magnitude / remainingDistance;
+                moveVector = move.ForwardVector();
+                friction = 1;  //currentBoardLoc.GetFriction()
+                moveVector = friction * Speed * deltaTime * moveVector;
+
 
             }
             else

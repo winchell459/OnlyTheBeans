@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveSet : MonoBehaviour
 {
     public List<PieceMove> Moves;
-    private int movesIndex = 0;
+    public int movesIndex = 0;
     private bool isActive;
     // Start is called before the first frame update
     void Start()
@@ -49,12 +49,28 @@ public class MoveSet : MonoBehaviour
     public bool HasNextMove()
     {
         if (movesIndex < Moves.Count - 1) return true;
+        isActive = false;
         return false;
+    }
+    public PieceMove GetNextMove()
+    {
+        return Moves[movesIndex + 1];
     }
     public PieceMove GetNextMove(Vector3 StartLoc, BoardPiece cat, BoardSpace moveSpace, Board.Direction direction)
     {
         //movesIndex += 1;
-        if (movesIndex + 1 >= Moves.Count)
+        PieceMove move = Moves[movesIndex];
+        if(move.GetMyType() == "Walk" && Board.GetBoardDistance(move.moveSpace.GetSpaceByDirection(direction).GetCenterPoint(),cat.transform.position) > 0.1f)
+        {
+            moveSpace = moveSpace.GetSpaceByDirection(direction);
+            Debug.Log("flipped " + moveSpace.name + " " + move.moveSpace.name);
+
+            Board.Direction flippedDir = Board.FlipDirection(direction);
+            cat.pieceDirection = flippedDir;
+            GetMoveFlipped(flippedDir, moveSpace);
+            return move;
+        }
+        else if (movesIndex + 1 >= Moves.Count)
         {
             isActive = false;
             return null;

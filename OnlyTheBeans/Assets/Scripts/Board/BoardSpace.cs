@@ -44,7 +44,8 @@ public abstract class BoardSpace : MonoBehaviour
         if (enters == Board.Direction.East) return GetWestPoint();
         else if (enters == Board.Direction.West) return GetEastPoint();
         else if (enters == Board.Direction.North) return GetSouthPoint();
-        else return GetNorthPoint();
+        else if (enters == Board.Direction.South) return GetNorthPoint();
+        else return new Vector3(0,-10,0);
     }
 
     public Vector3 GetEastPoint()

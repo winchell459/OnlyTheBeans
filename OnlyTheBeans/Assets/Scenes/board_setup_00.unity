@@ -424,6 +424,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!4 &149740347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3325336545934351749, guid: da4a8646c47394c7a9aab32ebad61bdd,
@@ -930,6 +931,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!1001 &456178404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,17 +1008,17 @@ PrefabInstance:
         type: 3}
       propertyPath: PosX
       value: 
-      objectReference: {fileID: 1457186329}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: NegX
       value: 
-      objectReference: {fileID: 1749732170}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: PosZ
       value: 
-      objectReference: {fileID: 1903425490}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da4a8646c47394c7a9aab32ebad61bdd, type: 3}
 --- !u!4 &458494413 stripped
@@ -1475,6 +1477,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2046,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a2bebd8d1da6348f28b7831381bb72a6, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!1 &1096609379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,17 +2223,17 @@ PrefabInstance:
         type: 3}
       propertyPath: PosX
       value: 
-      objectReference: {fileID: 619641489}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: NegX
       value: 
-      objectReference: {fileID: 2085548423}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: PosZ
       value: 
-      objectReference: {fileID: 1671650986}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da4a8646c47394c7a9aab32ebad61bdd, type: 3}
 --- !u!4 &1193173609 stripped
@@ -2309,7 +2313,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PosX
       value: 
-      objectReference: {fileID: 545186927}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: NegX
@@ -2319,7 +2323,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PosZ
       value: 
-      objectReference: {fileID: 575805647}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da4a8646c47394c7a9aab32ebad61bdd, type: 3}
 --- !u!114 &1221856769 stripped
@@ -2672,12 +2676,12 @@ PrefabInstance:
         type: 3}
       propertyPath: NegX
       value: 
-      objectReference: {fileID: 545186927}
+      objectReference: {fileID: 0}
     - target: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
         type: 3}
       propertyPath: PosZ
       value: 
-      objectReference: {fileID: 722826615}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da4a8646c47394c7a9aab32ebad61bdd, type: 3}
 --- !u!1001 &1396542674
@@ -3019,6 +3023,7 @@ MonoBehaviour:
   Moves:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!1 &1641083127
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,6 +4024,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!114 &1951083979 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2730497055866204445, guid: da4a8646c47394c7a9aab32ebad61bdd,
@@ -4183,6 +4189,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 3d212ad77dae743d98add89b69c2d173, type: 2}
   - {fileID: 11400000, guid: 2897e20f5fea54b0a85aca20570af308, type: 2}
+  movesIndex: 0
 --- !u!1001 &2071525975
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,5 +27,13 @@ public static class Board
         else if (direction == Direction.Up) return Direction.Down;
         else return Direction.Up;
     }
+    public static Direction GetDirection(Vector3 direction)
+    {
+        direction = direction.normalized;
+        if (direction.x >= 0.5f) return Direction.East;
+        else if (direction.x < -0.5f) return Direction.West;
+        else if (direction.z > 0.5f) return Direction.North;
+        else return Direction.South;
+    }
 
 }
