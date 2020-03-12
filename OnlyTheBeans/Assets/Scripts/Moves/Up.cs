@@ -20,7 +20,11 @@ public class Up : PieceMove
 
     public override PieceMove GetCopy()
     {
-        return new Up();
+        Up newUp = new Up();
+        newUp.UpDistance = UpDistance;
+        newUp.UpFactor = UpFactor;
+        CopyParentAttributes(newUp);
+        return newUp;
     }
     public override string GetMyType()
     {

@@ -15,7 +15,10 @@ public class Walk : PieceMove
         else EndLoc = moveSpace.GetSpaceByDirection(Direction).GetCenterPoint();
     }
     public override PieceMove GetCopy() {
-        return new Walk();
+        Walk newWalk = new Walk();
+        newWalk.WalkingFactor = WalkingFactor;
+        CopyParentAttributes(newWalk);
+        return newWalk;
     }
     public override string GetMyType()
     {

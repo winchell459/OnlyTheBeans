@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class CatController : BoardPiece
 {
+    public override void FinalizeBehavior()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void InitializeBehavior()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void MoveBehavior()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+
+
 
     // Start is called before the first frame update
     void Start()

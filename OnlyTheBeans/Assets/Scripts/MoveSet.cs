@@ -12,7 +12,7 @@ public class MoveSet : MonoBehaviour
     {
         for (int i = 0; i < Moves.Count; i += 1)
         {
-            //Moves[i] = Moves[i].GetCopy();
+            Moves[i] = Moves[i].GetCopy();
         }
 
     }

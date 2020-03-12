@@ -29,6 +29,11 @@ public abstract class BoardPiece : MonoBehaviour
     public BoardSpace currentBoardLoc;
     public Board.Direction pieceDirection;
 
+    public abstract void MoveBehavior();
+    public abstract void InitializeBehavior();
+    public abstract void FinalizeBehavior();
+    public bool MovementInterupt = false;
+
     /// <summary>
     /// Initialize MoveSet
     /// </summary>
@@ -38,6 +43,7 @@ public abstract class BoardPiece : MonoBehaviour
     /// 
     public bool MovePiece(MoveSet moveSet, Board.Direction direction)
     {
+
         InitializeMoves(direction, moveSet);
         PieceStat = PieceStats.isMoving;
         return MovePiece();
@@ -48,6 +54,7 @@ public abstract class BoardPiece : MonoBehaviour
     //}
     public bool MovePiece()//bool isStarting, bool forward, Board.Direction direction, MoveSet moveSet)
     {
+        MoveBehavior();
         //if (isStarting) InitializeMoves(direction, moveSet);
         PieceMove move = moveSet.GetMove();
         Vector3 moveVector = move.ForwardVector();
@@ -81,6 +88,7 @@ public abstract class BoardPiece : MonoBehaviour
                 transform.position = move.GetEndLoc();
 
                 PieceStat = PieceStats.idle;
+                FinalizeBehavior();
                 return false;
             }
 
@@ -101,6 +109,7 @@ public abstract class BoardPiece : MonoBehaviour
     }
     public void InitializeMoves(Board.Direction direction, MoveSet moveSet)
     {
+        InitializeBehavior();
         this.moveSet = moveSet;
         moveSet.StartMoves(this, currentBoardLoc, direction);
 

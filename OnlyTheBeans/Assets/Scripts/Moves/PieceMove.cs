@@ -29,4 +29,14 @@ public abstract class PieceMove : ScriptableObject
     }
     public abstract void InitializeMoveType(bool isLastSpace);
     public abstract Vector3 GetEndLoc();
+    public void CopyParentAttributes(PieceMove move)
+    {
+        move.StartLoc = StartLoc;
+        move.EndLoc = EndLoc;
+        move.Direction = Direction;
+        move.moveSpace = moveSpace;
+        move.myPiece = myPiece;
+        move.Initialized = Initialized;
+
+    }
 }

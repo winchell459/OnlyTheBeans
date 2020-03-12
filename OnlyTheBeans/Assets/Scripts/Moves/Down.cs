@@ -20,7 +20,11 @@ public class Down : PieceMove
 
     public override PieceMove GetCopy()
     {
-        return new Down();
+        Down newDown = new Down();
+        newDown.DownDistance = DownDistance;
+        newDown.DownFactor = DownFactor;
+        CopyParentAttributes(newDown);
+        return newDown;
     }
     public override string GetMyType()
     {
